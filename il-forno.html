@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Il Forno — Wood-Fired Trattoria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pine: #1F2E28;
+    --pine-dark: #14201B;
+    --cream: #F6F0E2;
+    --gold: #C79A44;
+    --gold-light: #E8C77A;
+    --rust: #9C4A32;
+    --rust-light: #B65A3D;
+    --ink: #1B1B1B;
+    --paper: #FFFDF7;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+    background-image: radial-gradient(circle at 1px 1px, rgba(31,46,40,0.06) 1px, transparent 0);
+    background-size: 22px 22px;
+  }
+  h1, h2, h3, .display { font-family: 'Fraunces', Georgia, serif; font-weight: 500; line-height: 1.08; margin: 0; }
+  a { color: inherit; }
+  img, svg { max-width: 100%; display: block; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 30;
+    padding-top: calc(16px + env(safe-area-inset-top, 0px));
+    padding-bottom: 16px;
+    background: rgba(246,240,226,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(31,46,40,0.1);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; }
+  .brand { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600; letter-spacing: 0.3px; display: flex; align-items: center; gap: 8px; }
+  .brand .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--rust); display: inline-block; }
+  .navlinks { display: flex; gap: 30px; font-size: 14.5px; list-style: none; padding: 0; margin: 0; }
+  .navlinks a { text-decoration: none; opacity: 0.75; transition: opacity 0.2s; }
+  .navlinks a:hover, .navlinks a:focus-visible { opacity: 1; }
+  .navbtn {
+    background: var(--rust); color: var(--paper); border: none; padding: 10px 20px;
+    border-radius: 3px; font-size: 14px; cursor: pointer; text-decoration: none;
+    transition: background 0.2s;
+  }
+  .navbtn:hover { background: var(--rust-light); }
+
+  /* HERO */
+  header.hero {
+    padding: 28px 0 48px;
+    text-align: center;
+    position: relative;
+    min-height: 62vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #1a120c center/cover no-repeat;
+    background-image: linear-gradient(rgba(20,32,27,0.62), rgba(20,32,27,0.72)),
+      url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1600&q=85');
+    color: var(--cream);
+  }
+  header.hero .kicker { color: var(--gold-light); }
+  header.hero .kicker::before, header.hero .kicker::after { background: var(--gold-light); }
+  header.hero h1 { color: var(--cream); }
+  header.hero h1 em { color: var(--gold-light); }
+  header.hero p { color: rgba(246,240,226,0.9); }
+  .kicker {
+    font-size: 14.5px; color: var(--rust); font-style: italic; font-family: 'Fraunces', serif;
+    margin-bottom: 14px; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .kicker::before, .kicker::after { content: ''; width: 20px; height: 1px; background: var(--rust); opacity: 0.5; }
+  .hero h1 { font-size: clamp(34px, 6.5vw, 68px); max-width: 820px; margin: 0 auto; opacity: 0; animation: riseIn 0.9s ease 0.1s forwards; }
+  .hero h1 em { font-style: italic; color: var(--rust); }
+  .hero p { max-width: 500px; margin: 18px auto 0; font-size: 17px; opacity: 0; animation: riseIn 0.9s ease 0.3s forwards; }
+  @keyframes riseIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-ctas { margin-top: 28px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; opacity: 0; animation: riseIn 0.9s ease 0.5s forwards; }
+  .btn-primary {
+    background: var(--pine); color: var(--paper); padding: 15px 30px; border-radius: 3px;
+    text-decoration: none; font-size: 15px; font-weight: 500; display: inline-block;
+    transition: transform 0.15s ease, background 0.2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); background: var(--pine-dark); }
+  header.hero .btn-primary { background: var(--gold); color: var(--pine-dark); }
+  header.hero .btn-primary:hover { background: var(--gold-light); }
+  .btn-ghost {
+    border: 1.5px solid var(--pine); padding: 14px 28px; border-radius: 3px; text-decoration: none;
+    font-size: 15px; font-weight: 500; color: var(--pine); transition: background 0.2s;
+  }
+  .btn-ghost:hover { background: rgba(31,46,40,0.06); }
+  header.hero .btn-ghost {
+    border-color: rgba(246,240,226,0.7); color: var(--cream);
+  }
+  header.hero .btn-ghost:hover { background: rgba(246,240,226,0.12); }
+
+  .hero-image { display: none; }
+
+  /* stat strip */
+  .stat-strip { padding: 34px 0; border-top: 1px solid rgba(31,46,40,0.1); border-bottom: 1px solid rgba(31,46,40,0.1); }
+  .stat-strip .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
+  .stat { text-align: center; flex: 1; min-width: 140px; }
+  .stat strong { display: block; font-family: 'Fraunces', serif; font-size: 34px; color: var(--rust); }
+  .stat span { font-size: 13px; opacity: 0.7; }
+
+  section { padding: 90px 0; }
+  .story { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 64px; align-items: center; }
+  .story-text h2 { font-size: clamp(30px, 4vw, 44px); max-width: 480px; }
+  .story-text p { margin-top: 22px; max-width: 460px; opacity: 0.82; font-size: 16px; }
+  .story-text p + p { margin-top: 14px; }
+  .story-cta { margin-top: 28px; }
+  .story-visual { position: relative; }
+  .story-visual img { border-radius: 6px; width: 100%; height: 420px; object-fit: cover; }
+  .story-visual .badge {
+    position: absolute; bottom: -22px; left: -22px; background: var(--gold);
+    color: var(--pine-dark); padding: 18px 22px; border-radius: 6px; font-family: 'Fraunces', serif;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.18); max-width: 190px;
+  }
+  .story-visual .badge strong { display: block; font-size: 22px; }
+  .story-visual .badge span { font-size: 12.5px; font-family: 'Inter', sans-serif; opacity: 0.8; }
+
+  /* CHEF SPOTLIGHT */
+  .chef { background: var(--paper); border-radius: 10px; padding: 60px; display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 56px; align-items: center; box-shadow: 0 20px 60px rgba(31,46,40,0.08); }
+  .chef img { border-radius: 8px; width: 100%; height: 420px; object-fit: cover; }
+  .chef-quote { font-family: 'Fraunces', serif; font-style: italic; font-size: 24px; line-height: 1.4; color: var(--pine-dark); }
+  .chef-name { margin-top: 24px; font-size: 14.5px; }
+  .chef-name strong { color: var(--rust); font-style: normal; }
+
+  .menu-section { background: var(--pine); color: var(--cream); position: relative; overflow: hidden; }
+  .menu-section::before {
+    content: ''; position: absolute; top: -100px; right: -100px; width: 340px; height: 340px;
+    border-radius: 50%; background: radial-gradient(circle, rgba(199,154,68,0.18), transparent 70%);
+  }
+  .menu-head { text-align: center; max-width: 580px; margin: 0 auto 56px; position: relative; }
+  .menu-head .kicker { color: var(--gold); }
+  .menu-head .kicker::before, .menu-head .kicker::after { background: var(--gold); }
+  .menu-head h2 { font-size: clamp(30px, 4vw, 44px); }
+  .menu-tabs { display: flex; justify-content: center; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
+  .menu-tab {
+    font-size: 13px; padding: 8px 18px; border-radius: 20px;
+    border: 1px solid rgba(246,240,226,0.45); color: var(--cream);
+    background: rgba(246,240,226,0.08); opacity: 1; transition: all 0.2s;
+  }
+  .menu-tab:hover { background: rgba(246,240,226,0.15); border-color: rgba(246,240,226,0.7); }
+  .menu-tab.active {
+    background: var(--gold); color: var(--pine-dark); border-color: var(--gold);
+    font-weight: 600;
+  }
+  .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(246,240,226,0.15); border-radius: 8px; overflow: hidden; position: relative; }
+  .menu-card { background: var(--pine); padding: 38px 32px; transition: background 0.25s; }
+  .menu-card:hover { background: #24352E; }
+  .menu-card.featured { background: var(--rust); }
+  .menu-card.featured:hover { background: var(--rust-light); }
+  .menu-card .num { font-family: 'Fraunces', serif; font-style: italic; color: var(--gold); font-size: 14px; }
+  .menu-card.featured .num { color: rgba(255,255,255,0.75); }
+  .menu-card h3 { font-size: 23px; margin: 14px 0 10px; }
+  .menu-card p { font-size: 14.5px; opacity: 0.72; margin: 0 0 22px; }
+  .menu-card ul { list-style: none; padding: 0; margin: 0; font-size: 14.5px; }
+  .menu-card li { padding: 8px 0; border-top: 1px solid rgba(246,240,226,0.12); display: flex; justify-content: space-between; }
+  .menu-card li:first-child { border-top: none; }
+  .menu-card.featured li { border-top-color: rgba(255,255,255,0.2); }
+  .menu-card .price { color: var(--gold); font-family: 'Fraunces', serif; }
+  .menu-card.featured .price { color: var(--cream); }
+  .menu-note { text-align: center; margin-top: 34px; font-size: 13.5px; opacity: 0.6; }
+
+  /* GALLERY */
+  .gallery-wrap { overflow: hidden; }
+  .gallery-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; flex-wrap: wrap; gap: 16px; }
+  .gallery-head h2 { font-size: clamp(28px, 4vw, 40px); max-width: 420px; }
+  .gallery-hint { font-size: 13.5px; opacity: 0.6; font-style: italic; font-family: 'Fraunces', serif; }
+  .gallery-strip { display: flex; gap: 18px; overflow-x: auto; padding-bottom: 14px; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; }
+  .gallery-strip::-webkit-scrollbar { height: 6px; }
+  .gallery-strip::-webkit-scrollbar-thumb { background: rgba(31,46,40,0.25); border-radius: 4px; }
+  .gallery-strip figure { flex: 0 0 260px; margin: 0; scroll-snap-align: start; transition: transform 0.25s; }
+  .gallery-strip figure:hover { transform: translateY(-6px); }
+  .gallery-strip img { border-radius: 6px; box-shadow: 0 14px 30px rgba(31,46,40,0.14); width: 260px; height: 320px; object-fit: cover; }
+  .gallery-strip figcaption { margin-top: 12px; font-size: 13.5px; font-style: italic; font-family: 'Fraunces', serif; opacity: 0.75; }
+
+  /* TESTIMONIALS */
+  .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  .testi-card { background: var(--paper); padding: 34px 30px; border-radius: 8px; box-shadow: 0 10px 26px rgba(31,46,40,0.06); }
+  .testi-card.mid { background: var(--rust); color: var(--paper); }
+  .testi-stars { color: var(--gold); font-size: 14px; margin-bottom: 14px; }
+  .testi-card.mid .testi-stars { color: var(--gold-light); }
+  .testi-card p.quote { font-size: 15.5px; opacity: 0.9; }
+  .testi-who { margin-top: 20px; font-size: 13.5px; opacity: 0.65; }
+  .testi-card.mid .testi-who { opacity: 0.85; }
+
+  /* HOURS / LOCATION */
+  .hours-band { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; background: var(--paper); border-radius: 10px; padding: 56px; box-shadow: 0 20px 60px rgba(31,46,40,0.08); }
+  .hours-list { list-style: none; padding: 0; margin: 20px 0 0; }
+  .hours-list li { display: flex; justify-content: space-between; padding: 11px 0; border-top: 1px solid rgba(31,46,40,0.08); font-size: 15px; }
+  .hours-list li:first-child { border-top: none; }
+  .hours-list li strong { color: var(--rust); font-weight: 500; }
+  .map-visual img { border-radius: 8px; width: 100%; height: 320px; object-fit: cover; }
+
+  /* CTA */
+  .cta-band { background: var(--rust); color: var(--paper); text-align: center; border-radius: 10px; padding: 76px 40px; position: relative; overflow: hidden; }
+  .cta-band::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 80% 20%, rgba(246,240,226,0.15), transparent 60%); }
+  .cta-band h2 { font-size: clamp(28px, 4vw, 42px); max-width: 580px; margin: 0 auto; position: relative; }
+  .cta-band p { margin: 18px auto 30px; max-width: 460px; opacity: 0.9; position: relative; }
+  .cta-band .btn-primary { background: var(--paper); color: var(--rust); position: relative; }
+  .cta-band .btn-primary:hover { background: var(--cream); }
+
+  footer { background: var(--ink); color: rgba(246,240,226,0.75); padding: 56px 0 30px; }
+  .foot-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; padding-bottom: 40px; border-bottom: 1px solid rgba(246,240,226,0.15); }
+  .foot-brand { font-family: 'Fraunces', serif; color: var(--cream); font-size: 24px; }
+  .foot-brand p { margin-top: 10px; font-size: 14px; max-width: 260px; opacity: 0.7; }
+  .foot-social { display: flex; gap: 12px; margin-top: 18px; }
+  .foot-social a { width: 34px; height: 34px; border: 1px solid rgba(246,240,226,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 13px; }
+  .foot-cols { display: flex; gap: 60px; flex-wrap: wrap; }
+  .foot-col h4 { font-size: 13.5px; color: var(--gold); margin-bottom: 14px; font-weight: 500; }
+  .foot-col a { display: block; font-size: 14px; text-decoration: none; margin-bottom: 9px; opacity: 0.8; }
+  .foot-bottom { padding-top: 22px; font-size: 13px; opacity: 0.55; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+
+  @media (max-width: 900px) {
+    .navlinks { display: none; }
+    .story, .chef, .hours-band { grid-template-columns: 1fr; gap: 40px; }
+    .menu-grid, .testi-grid { grid-template-columns: 1fr; }
+    .chef { padding: 36px; }
+    .hours-band { padding: 36px; }
+  }
+
+  /* MENU TAB HIGHLIGHT */
+  .menu-tab { cursor: pointer; font-family: 'Inter', sans-serif; }
+  .menu-card.pulse { animation: pulseRing 0.9s ease; }
+  @keyframes pulseRing {
+    0% { box-shadow: 0 0 0 0 rgba(199,154,68,0.6) inset; }
+    100% { box-shadow: 0 0 0 0 rgba(199,154,68,0) inset; }
+  }
+  .menu-card { outline: 2px solid transparent; outline-offset: -2px; transition: background 0.25s, outline-color 0.3s; }
+  .menu-card.pulse { outline-color: var(--gold); }
+
+  /* MODAL */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(20,32,27,0.65); z-index: 100;
+    display: none; align-items: center; justify-content: center; padding: 12px;
+    backdrop-filter: blur(4px);
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: var(--paper); border-radius: 10px; padding: 28px 24px;
+    max-width: 380px; width: 100%; max-height: 92vh; overflow-y: auto;
+    position: relative; box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+    animation: modalIn 0.25s ease;
+  }
+  @media (max-width: 480px) {
+    .modal-overlay { padding: 0; align-items: flex-end; }
+    .modal-box {
+      max-width: 100%; width: 100%; max-height: 92vh;
+      border-radius: 16px 16px 0 0; padding: 24px 20px 28px;
+    }
+  }
+  @keyframes modalIn { from { opacity: 0; transform: translateY(14px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+  .modal-close {
+    position: absolute; top: 12px; right: 12px; background: none; border: none; font-size: 20px;
+    cursor: pointer; color: var(--ink); opacity: 0.5; line-height: 1;
+  }
+  .modal-close:hover { opacity: 1; }
+  .modal-box h3 { font-size: 22px; margin-bottom: 4px; }
+  .modal-box .sub { font-size: 13.5px; opacity: 0.7; margin-bottom: 16px; }
+  .modal-box label { display: block; font-size: 12.5px; margin-bottom: 4px; margin-top: 12px; opacity: 0.8; }
+  .modal-box label:first-of-type { margin-top: 0; }
+  .modal-box input, .modal-box select {
+    width: 100%; padding: 10px 12px; border-radius: 4px; border: 1px solid rgba(31,46,40,0.2);
+    font-family: 'Inter', sans-serif; font-size: 14px; background: var(--cream); color: var(--ink);
+  }
+  .modal-box input:focus, .modal-box select:focus { outline: 2px solid var(--rust); outline-offset: 1px; }
+  .modal-submit {
+    width: 100%; margin-top: 18px; background: var(--rust); color: var(--paper); border: none;
+    padding: 13px; border-radius: 4px; font-size: 15px; font-weight: 500; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .modal-submit:hover { background: var(--rust-light); }
+  .modal-success { display: none; text-align: center; padding: 8px 0; }
+  .modal-success.show { display: block; }
+  .modal-success .check {
+    width: 48px; height: 48px; border-radius: 50%; background: var(--pine); color: var(--cream);
+    display: flex; align-items: center; justify-content: center; font-size: 22px; margin: 0 auto 12px;
+  }
+  .modal-form.hide { display: none; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>Il Forno</div>
+    <ul class="navlinks">
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#reserve">Reserve</a></li>
+    </ul>
+    <button class="navbtn js-reserve" type="button">Book a Table</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Wood-fired since 1987</div>
+    <h1>Food tastes better <em>slower,</em><br>shared louder</h1>
+    <p>A countryside trattoria in the city — hearth-baked bread, hand-rolled pasta, and a table that's always got room for one more.</p>
+    <div class="hero-ctas">
+      <button class="btn-primary js-reserve" type="button">Reserve a Table</button>
+      <a href="#menu" class="btn-ghost">See the Menu</a>
+    </div>
+  </div>
+  <div class="wrap hero-image">
+    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1400&q=85" alt="Close-up of wood-fired Neapolitan pizza with melted mozzarella and basil" width="1080" height="520" loading="eager">
+  </div>
+</header>
+
+<div class="stat-strip">
+  <div class="wrap">
+    <div class="stat"><strong>37</strong><span>years, one hearth</span></div>
+    <div class="stat"><strong>18</strong><span>dishes on the menu</span></div>
+    <div class="stat"><strong>4.9</strong><span>average guest rating</span></div>
+    <div class="stat"><strong>420°</strong><span>the oven never cools</span></div>
+  </div>
+</div>
+
+<section id="story">
+  <div class="wrap story">
+    <div class="story-text">
+      <div class="kicker">Know our story</div>
+      <h2>Three generations, one wood-fired oven, zero shortcuts</h2>
+      <p>Everything starts with the hearth — bread at dawn, sauces that simmer all afternoon, pasta rolled by hand the way our nonna taught us.</p>
+      <p>We haven't changed the recipe. We've just gotten better at it, one Sunday supper at a time.</p>
+      <div class="story-cta"><a href="#chef-wrap" class="btn-ghost">Meet the Chef</a></div>
+    </div>
+    <div class="story-visual">
+      <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=800&q=80" alt="Fresh handmade pasta being prepared in the kitchen" width="480" height="420" loading="lazy">
+      <div class="badge"><strong>Since 1987</strong><span>Family-run, four generations deep</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="chef-wrap">
+  <div class="wrap">
+    <div class="chef">
+      <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=600&q=80" alt="Head chef Marco Belloti in the kitchen" width="380" height="420" loading="lazy">
+      <div>
+        <p class="chef-quote">"A good sauce doesn't need forty ingredients. It needs the right four, and forty minutes of patience."</p>
+        <div class="chef-name"><strong>Marco Belloti</strong> — Head Chef, third generation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="menu" class="menu-section">
+  <div class="wrap">
+    <div class="menu-head">
+      <div class="kicker">From the hearth</div>
+      <h2>What's coming out of the oven tonight</h2>
+      <div class="menu-tabs">
+        <button class="menu-tab" type="button" data-target="antipasti">Antipasti</button>
+        <button class="menu-tab active" type="button" data-target="pasta">Pasta</button>
+        <button class="menu-tab" type="button" data-target="secondi">Secondi</button>
+      </div>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-card" data-cat="antipasti">
+        <div class="num">Antipasti</div>
+        <h3>To Start</h3>
+        <p>Small plates built for sharing</p>
+        <ul>
+          <li><span>Burrata, charred fig</span><span class="price">$14</span></li>
+          <li><span>Bread & whipped lardo</span><span class="price">$9</span></li>
+          <li><span>Grilled octopus</span><span class="price">$18</span></li>
+          <li><span>Fried artichokes</span><span class="price">$12</span></li>
+        </ul>
+      </div>
+      <div class="menu-card featured" data-cat="pasta">
+        <div class="num">Chef's Pick</div>
+        <h3>Hearth Pasta</h3>
+        <p>Rolled fresh every morning</p>
+        <ul>
+          <li><span>Tagliatelle, wild boar ragù</span><span class="price">$26</span></li>
+          <li><span>Cacio e pepe</span><span class="price">$21</span></li>
+          <li><span>Pappardelle, black truffle</span><span class="price">$32</span></li>
+          <li><span>Orecchiette, sausage & greens</span><span class="price">$24</span></li>
+        </ul>
+      </div>
+      <div class="menu-card" data-cat="secondi">
+        <div class="num">Secondi</div>
+        <h3>Mains</h3>
+        <p>Straight from the wood fire</p>
+        <ul>
+          <li><span>Whole branzino</span><span class="price">$34</span></li>
+          <li><span>Bistecca alla fiorentina</span><span class="price">$58</span></li>
+          <li><span>Roasted chicken, salsa verde</span><span class="price">$27</span></li>
+          <li><span>Lamb shank, white beans</span><span class="price">$31</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="menu-note">Full menu, wine pairings, and seasonal specials available at the table.</div>
+  </div>
+</section>
+
+<section id="gallery" class="gallery-wrap">
+  <div class="wrap">
+    <div class="gallery-head">
+      <h2>Around the dining room</h2>
+      <span class="gallery-hint">scroll for more →</span>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="gallery-strip">
+      <figure>
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80" alt="Warm dining room tables ready for guests" width="260" height="320" loading="lazy">
+        <figcaption>The hearth table</figcaption>
+      </figure>
+      <figure>
+        <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=600&q=80" alt="Plate of fresh pasta with tomato and basil" width="260" height="320" loading="lazy">
+        <figcaption>Sunday supper</figcaption>
+      </figure>
+      <figure>
+        <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=600&q=80" alt="Hand-rolled fresh pasta" width="260" height="320" loading="lazy">
+        <figcaption>Fresh pasta, daily</figcaption>
+      </figure>
+      <figure>
+        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80" alt="Wood-fired pizza with bubbling cheese" width="260" height="320" loading="lazy">
+        <figcaption>The wood-fired oven</figcaption>
+      </figure>
+      <figure>
+        <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80" alt="Glass of red wine on a wooden table" width="260" height="320" loading="lazy">
+        <figcaption>Aperitivo hour</figcaption>
+      </figure>
+      <figure>
+        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80" alt="Freshly baked rustic bread loaves" width="260" height="320" loading="lazy">
+        <figcaption>Hearth-baked bread</figcaption>
+      </figure>
+      <figure>
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80" alt="Close-up of Neapolitan-style pizza" width="260" height="320" loading="lazy">
+        <figcaption>Straight from the fire</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <div class="wrap">
+    <div class="menu-head" style="color:inherit;">
+      <div class="kicker">Guest reviews</div>
+      <h2>Where every visit becomes a great memory</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="quote">Every bite was a burst of flavor. The service and presentation were flawless from start to finish.</p>
+        <div class="testi-who">Daniel Johnson, regular since 2019</div>
+      </div>
+      <div class="testi-card mid">
+        <div class="testi-stars">★★★★★</div>
+        <p class="quote">The staff was incredibly welcoming and the pasta was clearly made that morning. You can taste the care.</p>
+        <div class="testi-who">Sophia Lee, first visit</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="quote">We celebrated our anniversary here and everything was perfect — the oven, the wine list, all of it.</p>
+        <div class="testi-who">Emily Carter, anniversary dinner</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="hours">
+  <div class="wrap">
+    <div class="hours-band">
+      <div>
+        <div class="kicker">Visit us</div>
+        <h2 style="font-size:32px;">Hours & location</h2>
+        <ul class="hours-list">
+          <li><span>Mon – Thu</span><strong>5:00pm – 10:00pm</strong></li>
+          <li><span>Fri – Sat</span><strong>5:00pm – 11:30pm</strong></li>
+          <li><span>Sunday</span><strong>4:00pm – 9:00pm</strong></li>
+        </ul>
+        <p style="margin-top:22px; font-size:14.5px; opacity:0.75;">
+          <strong>47 Mulberry Street</strong>, Little Italy<br>
+          New York, NY 10013<br>
+          Street parking after 6pm · Valet on weekends
+        </p>
+        <p style="margin-top:14px;">
+          <a href="https://www.google.com/maps/search/?api=1&query=47+Mulberry+Street,+New+York,+NY+10013" target="_blank" rel="noopener" style="color:var(--rust); font-weight:500; text-decoration:underline;">Open in Google Maps →</a>
+        </p>
+      </div>
+      <div class="map-visual">
+        <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=80" alt="Street view near the restaurant in the Riverside District" width="440" height="320" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reserve">
+  <div class="wrap">
+    <div class="cta-band">
+      <h2>Your table is waiting</h2>
+      <p>Reservations open two weeks out. Walk-ins welcome at the bar every night after 5.</p>
+      <button class="btn-primary js-reserve" type="button">Reserve a Table</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        Il Forno.
+        <p>A wood-fired trattoria serving the neighborhood since 1987.</p>
+        <div class="foot-social">
+          <a href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noopener">IG</a>
+          <a href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noopener">FB</a>
+        </div>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h4>Visit</h4>
+          <a href="#story">Our Story</a>
+          <a href="#menu">Menu</a>
+          <a href="#hours">Hours & Location</a>
+        </div>
+        <div class="foot-col">
+          <h4>Connect</h4>
+          <a href="#gallery">Gallery</a>
+          <a href="#reserve">Reservations</a>
+          <a href="mailto:careers@ilforno.example">Careers</a>
+        </div>
+      </div>
+    </div>
+    <div class="wrap foot-bottom" style="padding:0;">
+      <span>© 2026 Il Forno. All rights reserved.</span>
+      <span>Terms · Privacy</span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="reserveModal">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+    <div class="modal-form" id="modalForm">
+      <h3>Reserve a table</h3>
+      <div class="sub">Opens Gmail so you can send the request directly to us.</div>
+      <label for="rName">Name</label>
+      <input type="text" id="rName" placeholder="Your name" required>
+      <label for="rEmail">Your email</label>
+      <input type="email" id="rEmail" placeholder="you@example.com" required>
+      <label for="rDate">Date</label>
+      <input type="date" id="rDate" required>
+      <label for="rTime">Time</label>
+      <select id="rTime">
+        <option>5:00 PM</option><option>6:00 PM</option><option>7:00 PM</option>
+        <option>8:00 PM</option><option>9:00 PM</option>
+      </select>
+      <label for="rParty">Party size</label>
+      <select id="rParty">
+        <option>2 guests</option><option>3 guests</option><option>4 guests</option>
+        <option>5–6 guests</option><option>7+ guests</option>
+      </select>
+      <button class="modal-submit" id="modalSubmit" type="button">Send via Gmail</button>
+    </div>
+    <div class="modal-success" id="modalSuccess">
+      <div class="check">✓</div>
+      <h3>Gmail opened</h3>
+      <div class="sub" id="successDetail">Finish sending the email and we’ll confirm your table shortly.</div>
+      <button class="modal-submit" id="modalDone" type="button">Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var overlay = document.getElementById('reserveModal');
+    var form = document.getElementById('modalForm');
+    var success = document.getElementById('modalSuccess');
+
+    function openModal() {
+      overlay.classList.add('open');
+      form.classList.remove('hide');
+      success.classList.remove('show');
+    }
+    function closeModal() { overlay.classList.remove('open'); }
+
+    document.querySelectorAll('.js-reserve').forEach(function (btn) {
+      btn.addEventListener('click', openModal);
+    });
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    document.getElementById('modalDone').addEventListener('click', closeModal);
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+
+    document.getElementById('modalSubmit').addEventListener('click', function () {
+      var name = document.getElementById('rName').value.trim();
+      var email = document.getElementById('rEmail').value.trim();
+      var date = document.getElementById('rDate').value;
+      var time = document.getElementById('rTime').value;
+      var party = document.getElementById('rParty').value;
+
+      if (!name || !email || !date) {
+        alert('Please fill in your name, email, and preferred date.');
+        return;
+      }
+
+      var dateStr = new Date(date + 'T00:00:00').toLocaleDateString(undefined, {
+        weekday: 'long', month: 'long', day: 'numeric'
+      });
+
+      var subject = 'Table reservation request — ' + name;
+      var body =
+        'Hello Il Forno,\n\n' +
+        'I would like to reserve a table.\n\n' +
+        'Name: ' + name + '\n' +
+        'Email: ' + email + '\n' +
+        'Date: ' + dateStr + '\n' +
+        'Time: ' + time + '\n' +
+        'Party size: ' + party + '\n\n' +
+        'Thank you!';
+
+      var gmailUrl =
+        'https://mail.google.com/mail/?view=cm&fs=1' +
+        '&to=' + encodeURIComponent('reservations@ilforno.example') +
+        '&su=' + encodeURIComponent(subject) +
+        '&body=' + encodeURIComponent(body);
+
+      window.open(gmailUrl, '_blank');
+
+      document.getElementById('successDetail').textContent =
+        'Thanks, ' + name + '. Gmail should open with your request for ' + party +
+        ' on ' + dateStr + ' at ' + time + '. Just hit Send.';
+      form.classList.add('hide');
+      success.classList.add('show');
+    });
+
+    // Menu tab highlight
+    document.querySelectorAll('.menu-tab').forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        document.querySelectorAll('.menu-tab').forEach(function (t) { t.classList.remove('active'); });
+        tab.classList.add('active');
+        var target = tab.getAttribute('data-target');
+        document.querySelectorAll('.menu-card').forEach(function (card) { card.classList.remove('pulse'); });
+        var card = document.querySelector('.menu-card[data-cat="' + target + '"]');
+        if (card) {
+          card.classList.add('pulse');
+          card.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
